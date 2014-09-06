@@ -1,5 +1,7 @@
 # Task C1
 class StoreController < ApplicationController
+  include CurrentCart
+  before_action :set_cart
   def index
   	@products = Product.order(:title)
   	increment_counter

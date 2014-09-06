@@ -1,30 +1,4 @@
 <% if notice %>
-<p id="notice alert alert-info"><%= notice %></p>
+<p id="notice" class="alert alert-info"><%= notice %></p>
 <% end %>
-<h2>Your Pragmatic Cart</h2>
-<table class="table table-hover">
-<thead>
-	<th>#</th>
-	<th>Book Title</th>
-	<th>Quanity</th>
-	<th>Price per unit</th>
-	<th>Price</th>
-</thead>
-<tbody>
-<% @cart.line_items.each do |item| %>
-<tr>
-<td><%= item.id %></td>
-<td><%= item.product.title %></td>
-<td><%= item.quantity %></td>
-<td><%= number_to_currency(item.price) %></td>
-<td><%= number_to_currency(item.total_price) %></td>
-</tr>
-<% end %>
-<tr>
-<td></td>
-<td colspan="3">Total Price </td>
-<td><%= number_to_currency(@cart.total_price) %> </td>
-</tr>
-</tbody>
-</table>
-<%= button_to 'Empty cart', @cart, method: :delete, data:{ confirm: 'Are you sure?'},class: "btn btn-danger pull-right" %>
+<%= render @cart %>
