@@ -7,6 +7,7 @@
 	<th>#</th>
 	<th>Book Title</th>
 	<th>Quanity</th>
+	<th>Price per unit</th>
 	<th>Price</th>
 </thead>
 <tbody>
@@ -15,10 +16,12 @@
 <td><%= item.id %></td>
 <td><%= item.product.title %></td>
 <td><%= item.quantity %></td>
+<td><%= number_to_currency(item.price) %></td>
 <td><%= number_to_currency(item.total_price) %></td>
 </tr>
 <% end %>
 <tr>
+<td></td>
 <td colspan="3">Total Price </td>
 <td><%= number_to_currency(@cart.total_price) %> </td>
 </tr>

@@ -32,7 +32,9 @@ class LineItemsController < ApplicationController
     product = Product.find(params[:product_id])
     # @line_item = @cart.line_items.build(product: product)
     # Task E1: A smarter Cart
-    @line_item = @cart.add_product(product.id)
+    # @line_item = @cart.add_product(product.id)
+    # Task E : playing time
+    @line_item = @cart.add_product_with_price(product.id,product.price)
     # Task D : Play time reset session counter whenever a new line_item has been created
     session[:counter] = 0
     # ...
