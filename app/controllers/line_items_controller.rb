@@ -30,11 +30,15 @@ class LineItemsController < ApplicationController
     # @line_item = LineItem.new(line_item_params)
     # Task D3: Adding Add to Cart Button
     product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
+    # @line_item = @cart.line_items.build(product: product)
+    # Task E1: A smarter Cart
+    @line_item = @cart.add_product(product.id)
+    # Task D : Play time reset session counter whenever a new line_item has been created
+    session[:counter] = 0
     # ...
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @line_item.cart, notice: 'Line item was successfully created.' }
+        format.html { redirect_to @line_item.cart }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }
@@ -75,6 +79,8 @@ class LineItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def line_item_params
-      params.require(:line_item).permit(:product_id, :cart_id)
+    #  params.require(:line_item).permit(:product_id, :cart_id)
+    # Task E2
+       params.require(:line_item).permit(:product_id)
     end
 end

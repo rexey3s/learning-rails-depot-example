@@ -1,6 +1,10 @@
 <!-- Task C1: Create a Catalog Listing -->
 <% if notice %>
-<p id="notice"><%= notice %></p>
+<p id="notice" class="alert alert-info"><%= notice %></p>
+<% end %>
+<!--Task D: Playtime 3 and 5-->
+<% if session[:counter] > 5 %>
+<h4>You has been accessed this page for <%= pluralize session[:counter], 'time' %></h4>
 <% end %>
 <h1>Bookstore Catalog</h1>
 <% cache ['store', Product.latest] do %>
