@@ -1,0 +1,9 @@
+$('#cart').html("<%= escape_javascript render(@cart) %>");
+$('#current_item').addClass("info");
+	if ($('#cart tr').length !== 0) { 
+	$('#cart').css("display","");
+	if($('#wrapper').hasClass("toggled")) {
+		$("#wrapper").toggleClass("toggled");
+	}
+
+}

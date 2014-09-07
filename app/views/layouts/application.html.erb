@@ -34,7 +34,7 @@
         <li><%= link_to "Contact Us" %></li>
         <li><%= link_to "Cart" %></li>
           </ul>
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left">
           <button id="sidecart" class="btn btn-default">Side cart</button>
 
           </form>
@@ -44,21 +44,36 @@
 <div id="wrapper">
 
         <!-- Sidebar -->
-        <div id="sidebar-wrapper" class="toggled">
-        <%= render @cart %>
+        <div class="container-fluid">
+        <div id="sidebar-wrapper">
+        <div id="cart"
+        <% if @cart.line_items.empty? %>
+        style="display: none"
+        <% end %> 
+
+        >
+        <%= render @cart %> 
         </div>
+        </div>  
 <div id="main-content" class="container-fluid">
 <%= yield %>
 </div>
 </div>
-
+</div>
 </body>
  <script>
     $("#wrapper").toggleClass("toggled");
 
     $("#sidecart").click(function(e) {
-        e.preventDefault();
+      e.preventDefault();
+
+      if ($('#cart tr').length == 0) { 
+        alert("empty Cart"); 
+      }
+      else {
+        $('#cart').css("display","");
         $("#wrapper").toggleClass("toggled");
+      }
     });
  </script>
 </html>

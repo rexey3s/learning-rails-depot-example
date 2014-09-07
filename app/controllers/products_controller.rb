@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
+  include CurrentCart
+  before_action :set_cart
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_product
-
   # GET /products
   # GET /products.json
   def index
