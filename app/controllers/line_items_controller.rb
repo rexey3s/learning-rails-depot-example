@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   #Task D3: Adding Add to Cart Button
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart, only: [:create, :increment]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   # Task E : playing time 3
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_line_item
@@ -66,12 +66,42 @@ class LineItemsController < ApplicationController
     end
   end
 
+  def increment 
+    @line_item = @cart.line_items.find_by_id(params[:id])
+    @line_item = @line_item.increase_quantity 
+    respond_to do |format| 
+      if @line_item.save
+        format.html { redirect_to store_path ,notice: 'Line item \'quantity was successfully updated.'}
+        # format.js   { @current_item = @line_item }
+        format.js
+        format.json { render :show, status: :ok, location: @line_item }
+      else
+        format.html { render :new }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  def decrement 
+    @line_item = @cart.line_items.find_by_id(params[:id])
+    @line_item = @line_item.decrease_quantity 
+    respond_to do |format| 
+      if @line_item.save
+        format.html { redirect_to store_path ,notice: 'Line item \'quantity was successfully updated.'}
+        format.js   { @current_item = @line_item }
+        format.json { render :show, status: :ok, location: @line_item }
+      else
+        format.html { render :new }
+        format.json { render json: @line_item.errors, status: :unprocessable_entity }
+      end
+    end
+  end
   # DELETE /line_items/1
   # DELETE /line_items/1.json
   def destroy
     @line_item.destroy
     respond_to do |format|
-      format.html { redirect_to @line_item.cart, notice: 'Line item was successfully destroyed.' }
+      format.html { redirect_to store_url, notice: 'Line item was successfully destroyed.' }
+      
       format.json { head :no_content }
     end
   end

@@ -64,6 +64,8 @@ class CartsController < ApplicationController
       # format.html { redirect_to store_url, notice: 'Your cart has been emptied!' }
       # Task F4 : Hide empty cart
       format.html { redirect_to store_url }
+      # Task F : plying time create a ajax Empty Cart btn
+      format.js
       format.json { head :no_content }
     end
   end

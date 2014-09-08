@@ -41,18 +41,24 @@
        </div>
   </div>
 </nav>
+<% if @cart %>
+<div id="wrapper" <%if @cart.line_items.empty? %>
+class="toggled"
+<% end  %>
+>
+<% else %>
 <div id="wrapper">
-
+<% end %>
         <!-- Sidebar -->
         <div class="container-fluid">
         <div id="sidebar-wrapper">
+        <% if @cart %>
         <div id="cart"
         <% if @cart.line_items.empty? %>
         style="display: none"
-        <% end %> 
-
-        >
+        <% end %> >
         <%= render @cart %> 
+        <% end %> 
         </div>
         </div>  
 <div id="main-content" class="container-fluid">
@@ -62,18 +68,51 @@
 </div>
 </body>
  <script>
-    $("#wrapper").toggleClass("toggled");
-
+(function ($) {
     $("#sidecart").click(function(e) {
       e.preventDefault();
 
       if ($('#cart tr').length == 0) { 
-        alert("empty Cart"); 
+        alert("Empty Cart"); 
       }
       else {
         $('#cart').css("display","");
         $("#wrapper").toggleClass("toggled");
       }
     });
+    /**
+     * Input Spinner
+     */
+    $('.spinner .btn:first-of-type').on('click', function(e) {
+        var line_item = $(e.target).closest('tr').attr('data-line-item');
+        var curQuantity = $('tr[data-line-item='+line_item+'] .spinner input').val();
+     
+        $.ajax({
+          url: '/line_items/' + line_item + '/increment'  ,
+          data : {
+          },
+          method : 'put',
+          dataType: 'json',
+          success: function(res) { 
+                      $('tr[data-line-item='+line_item+'] .spinner input').val( parseInt($('tr[data-line-item='+line_item+'] .spinner input').val(), 10) + 1);
+                      console.log(res);
+                  },
+          error: function(err) {
+                      console.log(err);
+                  }
+        })
+        
+    });
+    $('.spinner .btn:last-of-type').on('click', function(e) {
+        var line_item = $(e.target).closest('tr').attr('data-line-item');
+        var curVal = $('tr[data-line-item='+line_item+'] .spinner input').val();
+        
+        if(curVal > 1) {
+          $('tr[data-line-item='+line_item+'] .spinner input').val( parseInt($('tr[data-line-item='+line_item+'] .spinner input').val(), 10) - 1);
+        } else {
+          $('tr[data-line-item='+line_item+']').find(':submit').click();
+        }
+    });
+  })(jQuery);
  </script>
 </html>

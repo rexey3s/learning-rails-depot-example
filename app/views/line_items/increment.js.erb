@@ -1,4 +1,4 @@
-(function ($) {
+	$('#cart').empty();
 	$('#cart').html("<%=j render(@cart) %>");
 
 	$('#current_item').addClass("info");
@@ -8,5 +8,3 @@
 			$("#wrapper").toggleClass("toggled");
 		}
 	}
-
-})(jQuery)

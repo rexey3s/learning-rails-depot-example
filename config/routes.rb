@@ -15,6 +15,14 @@ Rails.application.routes.draw do
   root 'store#index', as: 'store'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
+  # Create a route to decrement action
+  resources :line_items do
+    #member do
+    #  put 'decrement'
+    #end
+    put 'decrement', on: :member
+    put 'increment', on: :member
+  end
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase

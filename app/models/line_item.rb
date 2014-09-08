@@ -7,4 +7,16 @@ class LineItem < ActiveRecord::Base
   	# This price is a copy of product's price 
   	price * quantity
   end
+  def decrease_quantity
+  	if quantity > 1
+  		self.quantity -= 1
+  	else
+  		self.destroy 
+  	end
+  	self
+  end
+  def increase_quantity
+  	self.quantity += 1
+  	self
+  end
 end
