@@ -1,0 +1,45 @@
+<%= form_for(@order,:html => {:class => "form-horizontal",:role => "form"}) do |f| %>
+  <% if @order.errors.any? %>
+     <div class="alert alert-danger alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+
+      <u;>
+      <% @order.errors.full_messages.each do |message| %>
+       
+       <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class="form-group">
+    <%= f.label :name, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.text_field :name ,class: "form-control", placeholder: "Enter your fullname"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :address, class: "col-sm-2 control-label" %>
+     <div class="col-sm-10">
+     <%= f.text_field :address, class: "form-control", placeholder: "Enter your address"%>
+     </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :email, class: "col-sm-2 control-label"  %>
+    <div class="col-sm-10">
+    <%= f.text_field :email, class: "form-control", placeholder: "Enter your email"%>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :pay_type, class: "col-sm-2 control-label" %>
+    <div class="col-sm-10">
+    <%= f.select :pay_type, Order::PAYMENT_TYPES, {prompt: "Select a category"}, {class: "form-control"} %>
+    </div>
+  </div>
+  <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-10">
+    <%= f.submit class: "btn btn-primary" %>
+    </div>
+  </div>
+<% end %>
