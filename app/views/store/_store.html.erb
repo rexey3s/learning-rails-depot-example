@@ -1,0 +1,10 @@
+<div class="page-header">
+	<h1><strong>Bookstore Catalog</strong></h1>
+</div>
+<% cache ['store', Product.latest] do %>
+<% @products.each do |product|%>
+<% cache ['row', product] do %>
+<%= render product %>
+	<% end %>
+<% end %>
+<% end %>

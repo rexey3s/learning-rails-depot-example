@@ -1,6 +1,8 @@
 class Product < ActiveRecord::Base
   # Task D2 :Connecting Product
   has_many :line_items
+  # Task G2 : Atom Feeds
+  has_many :orders, through: :line_items
   before_destroy :ensure_not_referenced_by_any_line_item
   # Task B1 :Create validation
   validates :title, :description, :image_url, presence: true

@@ -4,7 +4,7 @@
           <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
       <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <u;>
+      <ul>
       <% @order.errors.full_messages.each do |message| %>
        
        <li><%= message %></li>

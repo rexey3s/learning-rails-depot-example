@@ -1,5 +1,12 @@
 <% unless cart.line_items.empty? %>
-<h2><center>Your Cart</center></h2>
+
+<div class="panel panel-default">
+<div class="panel-heading">
+<div class="panel-title"><strong>Shopping cart</strong>
+</div>
+</div>
+<div class="panel-body">
+
 <table class="table table-hover">
 <thead>
 	<th>#</th>
@@ -24,5 +31,7 @@
 <div class="btn-group btn-group-justified">
 <%= link_to 'Check out', new_order_path, method: :get , class: "btn btn-primary"%>
 <%= link_to 'Empty cart', @cart, method: :delete, data:{ confirm: 'Are you sure?'},class: "btn btn-warning", remote: true %>
+</div>
+</div>
 </div>
 <% end %>

@@ -42,8 +42,7 @@ class LineItemsControllerTest < ActionController::TestCase
   # Task F: Testing CoffeeScript markup
   test "markup needed for store.js.coffee is in place" do
     get :index
-    assert_select '.store .entry img', 3
-    assert_select '.entry input[type=submit]', 3
+    assert_select '.row input[type=submit]', 3
   end
 
   test "should show line_item" do

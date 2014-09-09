@@ -1,30 +1,12 @@
 <!-- Task C1: Create a Catalog Listing -->
 <% if notice %>
-<p id="notice" class="alert alert-info"><%= notice %></p>
+<div id="notice" class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><%= notice %>
+  </div>
 <% end %>
 <!--Task D: Playtime 3 and 5-->
 <% if session[:counter] > 5 %>
 <h4>You has been accessed this page for <%= pluralize session[:counter], 'time' %></h4>
 <% end %>
-<h1>Bookstore Catalog</h1>
-<% cache ['store', Product.latest] do %>
-<% @products.each do |product|%>
-<% cache ['row', product] do %>
-<div class="row entry">
-	<div class="col-xs-6 col-md-4">
-	<%=	 image_tag(product.image_url, class: "img-rounded") %>
-	</div>
-	<div class="col-xs-12 col-md-8">
-	<h3><%= link_to product.title, product %></h3>
-	<%= sanitize(product.description) %>
-	<div class="price_line">
-	<div class="btn-group btn-group-sm">
-	<div class="btn btn-warning btn-sm"><span class="badge price"><%= number_to_currency(product.price) %> </span></div>
-	<%= button_to 'Add to Cart', line_items_path(product_id: product), class: "btn btn-success btn-sm", remote: true %>
-	</div>
-			</div>
-			</div>
-		</div>
-	<% end %>
-<% end %>
-<% end %>
+
+<%= render @products %>

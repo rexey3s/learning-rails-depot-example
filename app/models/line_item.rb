@@ -6,7 +6,7 @@ class LineItem < ActiveRecord::Base
   def total_price
   	# Task E : playing time 1
   	# This price is a copy of product's price 
-  	self.price * self.quantity
+  	product.price * quantity
   end
   def decrease_quantity
   	if quantity > 1
