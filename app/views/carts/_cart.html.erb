@@ -22,6 +22,4 @@
 </tbody>
 </table>
 <td><%= button_to 'Empty cart', @cart, method: :delete, data:{ confirm: 'Are you sure?'},class: "btn btn-danger pull-right", remote: true %></td>
-<% else %>
-<p class="alert alert-info">Empty cart</p>
 <% end %>

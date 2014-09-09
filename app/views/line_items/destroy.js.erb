@@ -1,0 +1,4 @@
+$('#cart').html("<%=j render(@cart) %>");
+if($('#cart').is(':empty')) {
+	Helper.emptyCart($('#cart'));
+}

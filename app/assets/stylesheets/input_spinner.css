@@ -14,7 +14,7 @@
   vertical-align: middle;
   display: table-cell;
 }
-.input-group-btn-vertical > .btn {
+.input-group-btn-vertical > a > .btn {
   display: block;
   float: none;
   width: 100%;
@@ -24,10 +24,10 @@
   position: relative;
   border-radius: 0;
 }
-.input-group-btn-vertical > .btn:first-child {
+.input-group-btn-vertical > a > .btn:first-child {
   border-top-right-radius: 4px;
 }
-.input-group-btn-vertical > .btn:last-child {
+.input-group-btn-vertical > a > .btn:last-child {
   margin-top: -2px;
   border-bottom-right-radius: 4px;
 }

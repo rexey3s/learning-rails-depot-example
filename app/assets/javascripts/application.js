@@ -14,3 +14,14 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+var Helper = {
+	isNormalInteger: function(str) {
+	    return /^\+?(0|[1-9]\d*)$/.test(str);
+	},
+	emptyCart: function(selector) {
+		$(selector).fadeOut("fast",function() {
+				$(selector).empty();
+				$('#wrapper').toggleClass("toggled");
+		});
+	}
+}

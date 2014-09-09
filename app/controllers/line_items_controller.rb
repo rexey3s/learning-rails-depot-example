@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   #Task D3: Adding Add to Cart Button
   include CurrentCart
-  before_action :set_cart, only: [:create, :increment]
+  before_action :set_cart, only: [:create, :destroy, :increment, :decrement]
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
   # Task E : playing time 3
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_line_item
@@ -72,8 +72,7 @@ class LineItemsController < ApplicationController
     respond_to do |format| 
       if @line_item.save
         format.html { redirect_to store_path ,notice: 'Line item \'quantity was successfully updated.'}
-        # format.js   { @current_item = @line_item }
-        format.js
+        format.js 
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :new }
@@ -87,7 +86,7 @@ class LineItemsController < ApplicationController
     respond_to do |format| 
       if @line_item.save
         format.html { redirect_to store_path ,notice: 'Line item \'quantity was successfully updated.'}
-        format.js   { @current_item = @line_item }
+        format.js
         format.json { render :show, status: :ok, location: @line_item }
       else
         format.html { render :new }
@@ -99,10 +98,19 @@ class LineItemsController < ApplicationController
   # DELETE /line_items/1.json
   def destroy
     @line_item.destroy
-    respond_to do |format|
-      format.html { redirect_to store_url, notice: 'Line item was successfully destroyed.' }
-      
-      format.json { head :no_content }
+    if @cart.line_items.empty?
+      @cart.destroy
+      respond_to do |format| 
+        format.html { redirect_to store_url }
+        format.js { @line_item }
+        format.json { head :no_content }   
+      end
+    else 
+      respond_to do |format|
+        format.html { redirect_to store_url, notice: 'line item was successfully deleted' }
+        format.js  { @line_item }
+        format.json { head :no_content }
+      end
     end
   end
 

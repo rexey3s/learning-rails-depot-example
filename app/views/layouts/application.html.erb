@@ -68,9 +68,8 @@ class="toggled"
 </div>
 </body>
  <script>
-(function ($) {
     $("#sidecart").click(function(e) {
-      e.preventDefault();
+      e.defaultPrevented;
 
       if ($('#cart tr').length == 0) { 
         alert("Empty Cart"); 
@@ -83,36 +82,13 @@ class="toggled"
     /**
      * Input Spinner
      */
-    $('.spinner .btn:first-of-type').on('click', function(e) {
-        var line_item = $(e.target).closest('tr').attr('data-line-item');
-        var curQuantity = $('tr[data-line-item='+line_item+'] .spinner input').val();
-     
-        $.ajax({
-          url: '/line_items/' + line_item + '/increment'  ,
-          data : {
-          },
-          method : 'put',
-          dataType: 'json',
-          success: function(res) { 
-                      $('tr[data-line-item='+line_item+'] .spinner input').val( parseInt($('tr[data-line-item='+line_item+'] .spinner input').val(), 10) + 1);
-                      console.log(res);
-                  },
-          error: function(err) {
-                      console.log(err);
-                  }
-        })
-        
-    });
-    $('.spinner .btn:last-of-type').on('click', function(e) {
-        var line_item = $(e.target).closest('tr').attr('data-line-item');
-        var curVal = $('tr[data-line-item='+line_item+'] .spinner input').val();
-        
-        if(curVal > 1) {
-          $('tr[data-line-item='+line_item+'] .spinner input').val( parseInt($('tr[data-line-item='+line_item+'] .spinner input').val(), 10) - 1);
+    $('#cart .spinner input').on('change',function(){
+        if(Helper.isNormalInteger($(this).val())) {
+
         } else {
-          $('tr[data-line-item='+line_item+']').find(':submit').click();
+          alert('Quantity is a positive number!');
         }
     });
-  })(jQuery);
+    
  </script>
 </html>
