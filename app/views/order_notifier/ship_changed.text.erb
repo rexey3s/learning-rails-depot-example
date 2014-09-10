@@ -1,0 +1,13 @@
+# Task H1	
+
+Dear <%= @order.name %>
+
+Thank you for your recent order from The Pragmatic Store.
+
+We are sorry to announce you that your ship has been delayed due to some reasons.
+
+You ordered the following items:
+
+<%= render @order.line_items -%>
+
+We'll send you a separate e-mail when your order ships.

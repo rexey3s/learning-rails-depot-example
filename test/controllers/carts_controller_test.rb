@@ -50,4 +50,5 @@ class CartsControllerTest < ActionController::TestCase
     # Task E3
     assert_redirected_to store_path
   end
+
 end

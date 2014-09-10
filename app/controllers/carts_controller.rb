@@ -81,8 +81,9 @@ class CartsController < ApplicationController
       params[:cart]
     end
     # Task E2 : Handle invalid cart id
-    def invalid_cart
+    def invalid_cart (err)
       logger.error "Attempt to access invalid cart #{params[:id]}"
+      ErrorNotifier.error_mailer(err).deliver 
       redirect_to store_url, notice: 'Invalid cart'
     end
 end

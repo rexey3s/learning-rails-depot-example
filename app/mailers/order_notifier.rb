@@ -1,5 +1,5 @@
 class OrderNotifier < ActionMailer::Base
-  default from: "kira@localhost.org"
+  default from: "Kira <kira@localhost.org>"
 
   # Subject can be set in your I18n file at config/locales/en.yml
   # with the following lookup:
@@ -21,5 +21,11 @@ class OrderNotifier < ActionMailer::Base
     @order = order
 
     mail to: order.email,subject: 'Pragmatic Store Order Shipped'
+  end
+
+  def ship_changed (order) 
+    @order = order
+    
+    mail to: order.email, subject: 'Pragmatic Store ship date changed'
   end
 end
