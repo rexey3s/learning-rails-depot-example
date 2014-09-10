@@ -32,9 +32,10 @@
     </div>
   </div>
   <div class="form-group">
-    <%= f.label :pay_type, class: "col-sm-2 control-label" %>
+    <%= f.label :payment_type_id, class: "col-sm-2 control-label" %>
     <div class="col-sm-10">
-    <%= f.select :pay_type, Order::PAYMENT_TYPES, {prompt: "Select a category"}, {class: "form-control"} %>
+    <!--Customize by playing time activity 2 in Task G -->
+    <%= f.collection_select :payment_type_id, PaymentType.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
     </div>
   </div>
   <div class="form-group">

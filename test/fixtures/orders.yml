@@ -10,11 +10,11 @@ one:
   email: dave@example.org
 #END_HIGHLIGHT
 #START_HIGHLIGHT
-  pay_type: Check
+  payment_type_id: 1
 #END_HIGHLIGHT
 
 two:
   name: MyString
   address: MyText
   email: MyString
-  pay_type: MyString
+  payment_type_id: MyString

@@ -1,1 +1,10 @@
-	$('#cart').html("<%=j render(@cart) %>");
+$('#cart').html("<%=j render(@cart) %>");
+
+if($('#cart').is(':empty')) {
+	Helper.emptyCart($('#cart'));
+	var page = window.location.pathname;
+	if(page == '/orders/new') {
+		window.location = '/';
+	}
+}
+	
