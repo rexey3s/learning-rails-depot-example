@@ -10,6 +10,7 @@
 	    <div class="price_line">
 	     <div class="btn-group btn-group-sm">
 	     <div class="btn btn-warning btn-sm"><span class="badge price"><%= number_to_currency(product.price) %> </span></div>
+
 	     <%= button_to 'Add to Cart', line_items_path(product_id: product), class: "btn btn-success btn-sm", remote: true %>
 	</div>
   </div>

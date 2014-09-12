@@ -1,4 +1,6 @@
 class LineItemsController < ApplicationController
+  # Task I3: Limit Access
+  skip_before_action :authorize, only: [:create]
   #Task D3: Adding Add to Cart Button
   include CurrentCart
   before_action :set_cart, only: [:create, :destroy, :increment, :decrement]

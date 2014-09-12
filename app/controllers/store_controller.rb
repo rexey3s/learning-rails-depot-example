@@ -1,5 +1,7 @@
 # Task C1
 class StoreController < ApplicationController
+  # Task I3: Limit Access
+  skip_before_action :authorize
   include CurrentCart
   before_action :set_cart
   def index

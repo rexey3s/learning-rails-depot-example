@@ -1,4 +1,6 @@
 class CartsController < ApplicationController
+  # Task I3: Limit Access
+  skip_before_action :authorize, only: [:create, :update, :destroy]
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
   # Task E2
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart

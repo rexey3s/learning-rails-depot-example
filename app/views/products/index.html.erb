@@ -1,25 +1,17 @@
-<h1>Listing products</h1>
-<table>
-<% @products.each do |product| %>
-<tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
-<td>
-<%= image_tag(product.image_url, class: 'list_image') %>
-</td>
-<td class="list_description">
-<dl>
-<dt><%= product.title %></dt>
-<dd><%= truncate(strip_tags(product.description), length: 80) %></dd>
-</dl>
-</td>
-<td class="list_actions">
-<%= link_to 'Show', product %><br/>
-<%= link_to 'Edit', edit_product_path(product) %><br/>
-<%= link_to 'Destroy', product, method: :delete,
-data: { confirm: 'Are you sure?' } %>
-</td>
-</tr>
+<div class="page-header">
+	<h1><strong>Products</strong></h1>
+</div>
+<% if notice %>
+<div id="notice" class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button><%= notice %>
+  </div>
 <% end %>
-</table>
-<br />
 
-<%= link_to 'New Product', new_product_path %>
+
+<% cache ['store', Product.latest] do %>
+<% @products.each do |product|%>
+<% cache ['row', product] do %>
+<%= render product %>
+	<% end %>
+<% end %>
+<% end %>
